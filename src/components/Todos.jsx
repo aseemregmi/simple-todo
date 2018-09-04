@@ -46,7 +46,7 @@ class Todos extends Component {
     });
 
     return (
-      <div className="container">
+      <div className="container col-md-6 m-auto">
         <div className="card">
           <div className="card-body">
             <div className="card-title text-center">

@@ -12,12 +12,6 @@ class SignUp extends Component {
     };
   }
 
-  componentWillMount() {
-    if (this.props.auth) {
-      this.props.history.push('/');
-    }
-  }
-
   componentWillReceiveProps(props) {
     if (props.auth) {
       props.history.push('/');
@@ -36,8 +30,6 @@ class SignUp extends Component {
     };
 
     this.props.signUpUser(user);
-
-    this.props.history.push('/');
   };
 
   render() {

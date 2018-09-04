@@ -1,4 +1,4 @@
-import { GET_TODOS } from '../actions/types.js';
+import { GET_TODOS, POST_TODO } from '../actions/types.js';
 console.log(GET_TODOS);
 const initialState = {
   todos: null
@@ -9,6 +9,10 @@ export default function(state = initialState, action) {
     case GET_TODOS:
       return {
         todos: action.payload
+      };
+    case POST_TODO:
+      return {
+        todos: [state.todos, ...action.payload]
       };
     default:
       return { ...state };

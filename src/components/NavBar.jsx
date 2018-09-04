@@ -2,11 +2,24 @@ import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import logoutUserAction from '../actions/logoutUserAction';
+
 class NavBar extends Component {
+  onLogOutClick = e => {
+    const auth = this.props.user['x-auth'];
+
+    this.props.logoutUserAction(auth);
+
+    e.preventDefault();
+  };
   render() {
     const resultInDOM1 = this.props.user.email ? (
       <li className="nav-item">
-        <Link to="/users/logout" className="nav-link">
+        <Link
+          to="/users/logout"
+          className="nav-link"
+          onClick={this.onLogOutClick}
+        >
           Logout
         </Link>
       </li>
@@ -52,4 +65,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(NavBar);
+export default connect(
+  mapStateToProps,
+  { logoutUserAction }
+)(NavBar);

@@ -8,14 +8,9 @@ class Login extends Component {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      spinner: false
     };
-  }
-
-  componentWillMount() {
-    if (this.props.auth) {
-      this.props.history.push('/');
-    }
   }
 
   componentWillReceiveProps(props) {
@@ -35,8 +30,6 @@ class Login extends Component {
     };
 
     this.props.loginUser(user);
-
-    this.props.history.push('/');
 
     e.preventDefault();
   };

@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export default token => {
   return async dispatch => {
+    axios.get();
     const res = await axios.get(
       'https://protected-thicket-67134.herokuapp.com/todos',
       {

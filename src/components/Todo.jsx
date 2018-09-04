@@ -46,14 +46,14 @@ class Todo extends Component {
             <div className="col-sm-6">
               {!completed ? (
                 <button
-                  className="btn btn-primary btn-block"
+                  className="btn btn-primary btn-block mb-2"
                   onClick={this.onMarkAsCompleteClick}
                 >
                   Mark As Complete
                 </button>
               ) : (
                 <button
-                  className="btn btn-danger btn-block"
+                  className="btn btn-danger btn-block mb-2"
                   onClick={this.onDeleteClick}
                 >
                   Delete
