@@ -27,11 +27,11 @@ class Login extends Component {
 
             <form onSubmit={this.onSubmit}>
               <div class="form-group">
-                <label for="inputEmail1">Email address</label>
+                <label for="inputEmail">Email address</label>
                 <input
                   type="email"
                   class="form-control"
-                  id="inputEmail1"
+                  id="inputEmail"
                   name="email"
                   placeholder="Enter email"
                   onChange={this.onChange}

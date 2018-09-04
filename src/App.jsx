@@ -7,6 +7,7 @@ import store from './store';
 import NavBar from './components/NavBar';
 import Login from './components/Login';
 import Todos from './components/Todos';
+import TodoUpdate from './components/TodoUpdate';
 
 // CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -24,6 +25,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/login" component={Login} />
               <Route exact path="/" component={Todos} />
+              <Route exact path="/todos/update/:id" component={TodoUpdate} />
             </Switch>
           </div>
         </Router>

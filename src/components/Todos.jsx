@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import getTodos from '../actions/getTodosAction';
 
 import Todo from './Todo';
 
@@ -7,6 +8,16 @@ class Todos extends Component {
   state = {
     todos: {}
   };
+
+  componentWillMount() {
+    console.log('COMPONENT WILL MOUNT');
+  }
+
+  componentDidMount() {
+    const { auth } = this.props;
+    getTodos(auth);
+  }
+
   render() {
     if (!this.props.todos) {
       return <div>Loading</div>;
@@ -43,8 +54,12 @@ class Todos extends Component {
 
 function mapStateToProps(state) {
   return {
-    todos: state.todos.todos
+    todos: state.todos.todos,
+    auth: state.currentUser.user['x-auth']
   };
 }
 
-export default connect(mapStateToProps)(Todos);
+export default connect(
+  mapStateToProps,
+  { getTodos }
+)(Todos);
