@@ -8,6 +8,8 @@ import NavBar from './components/NavBar';
 import Login from './components/Login';
 import Todos from './components/Todos';
 import TodoUpdate from './components/TodoUpdate';
+import Home from './components/Home';
+import SignUp from './components/SignUp';
 
 // CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -24,8 +26,10 @@ class App extends Component {
             <NavBar />
             <Switch>
               <Route exact path="/login" component={Login} />
-              <Route exact path="/" component={Todos} />
+              <Route exact path="/todos" component={Todos} />
               <Route exact path="/todos/update/:id" component={TodoUpdate} />
+              <Route exact path="/signup" component={SignUp} />
+              <Route exact path="/" component={Home} />
             </Switch>
           </div>
         </Router>

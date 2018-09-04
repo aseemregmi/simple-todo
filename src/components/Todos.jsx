@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import getTodos from '../actions/getTodosAction';
+import Spinner from './Spinner';
 
 import Todo from './Todo';
 
@@ -10,17 +11,24 @@ class Todos extends Component {
   };
 
   componentWillMount() {
+    if (!this.props.auth) {
+      this.props.history.push('/login');
+    }
     console.log('COMPONENT WILL MOUNT');
   }
 
   componentDidMount() {
     const { auth } = this.props;
-    getTodos(auth);
+    this.props.getTodos(auth);
   }
 
   render() {
     if (!this.props.todos) {
-      return <div>Loading</div>;
+      return (
+        <div className="container m-auto">
+          <Spinner />
+        </div>
+      );
     }
 
     const todos = this.props.todos;

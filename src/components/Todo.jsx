@@ -39,25 +39,34 @@ class Todo extends Component {
       <div className="card mb-2 mt-4 ml-2 mr-2">
         <div className="card-body">
           <h4 className={textClass + ' mb-3'}>{text}</h4>
+
           {completedAtInDOM}
-          {!completed ? (
-            <button
-              className="btn btn-primary btn-block"
-              onClick={this.onMarkAsCompleteClick}
-            >
-              Mark As Complete
-            </button>
-          ) : (
-            <button
-              className="btn btn-danger btn-block"
-              onClick={this.onDeleteClick}
-            >
-              Delete
-            </button>
-          )}
-          <Link to={`/todos/update/${_id}`}>
-            <button className="btn btn-alert btn-block">Update</button>
-          </Link>
+
+          <div className="row">
+            <div className="col-sm-6">
+              {!completed ? (
+                <button
+                  className="btn btn-primary btn-block"
+                  onClick={this.onMarkAsCompleteClick}
+                >
+                  Mark As Complete
+                </button>
+              ) : (
+                <button
+                  className="btn btn-danger btn-block"
+                  onClick={this.onDeleteClick}
+                >
+                  Delete
+                </button>
+              )}
+            </div>
+
+            <div className="col-sm-6">
+              <Link to={`/todos/update/${_id}`}>
+                <button className="btn btn-alert btn-block">Update</button>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     );
