@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import getTodos from '../actions/getTodosAction';
 import NewTodo from './NewTodo';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
   componentWillReceiveProps(props) {
@@ -30,6 +31,27 @@ class Home extends Component {
               <NewTodo />
             </div>
           </div>
+
+          <div className="mt-5">
+            <h3>
+              You currently have :{' '}
+              {this.props.todos ? this.props.todos.length : 0} Todos'
+            </h3>
+
+            {this.props.todos
+              ? this.props.todos.map(todo => {
+                  return (
+                    <div key={todo._id}>
+                      <span>{todo.text}</span>
+                    </div>
+                  );
+                })
+              : null}
+
+            <Link to="/todos" className="btn btn-block btn-secondary mt-3">
+              Get Detailed List of all Todos
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -39,7 +61,8 @@ class Home extends Component {
 function mapStateToProps(state) {
   return {
     auth: state.currentUser.user['x-auth'],
-    email: state.currentUser.user.email
+    email: state.currentUser.user.email,
+    todos: state.todos.todos
   };
 }
 
