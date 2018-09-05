@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import getTodos from '../actions/getTodosAction';
+import updateTodo from '../actions/updateTodoAction';
 
 class TodoUpdate extends Component {
   constructor(props) {
@@ -14,29 +16,57 @@ class TodoUpdate extends Component {
     };
   }
 
-  UNSAFE_componentWillMount() {
+  componentWillReceiveProps(props) {
+    if (!props.auth) {
+      props.history.push('/login');
+    } else if (props.todos) {
+      const idParams = this.props.match.params.id;
+      console.log(idParams);
+
+      let todoMatched;
+      props.todos.forEach(todo => {
+        if (todo._id === idParams) {
+          todoMatched = todo;
+        }
+      });
+
+      if (!todoMatched) {
+        this.setState({ text: '404 Not Found' });
+      } else {
+        this.setState({
+          _id: todoMatched._id,
+          text: todoMatched.text,
+          completed: !!todoMatched.completed,
+          completedAt: todoMatched.completedAt
+        });
+      }
+    }
+  }
+  componentWillMount() {
     if (!this.props.auth) {
       this.props.history.push('/login');
-    }
+    } else if (!this.props.todos) {
+      this.props.getTodos(this.props.auth);
+    } else if (this.props.todos) {
+      const { idParams } = this.state;
 
-    const { idParams } = this.state;
-    let todoMatched;
-    this.props.todos.forEach(todo => {
-      if (todo._id === idParams) {
-        todoMatched = todo;
-        return;
-      }
-    });
-
-    if (!todoMatched) {
-      this.setState({ text: 'Not Found' });
-    } else {
-      this.setState({
-        _id: todoMatched._id,
-        text: todoMatched.text,
-        completed: !!todoMatched.completed,
-        completedAt: todoMatched.completedAt
+      let todoMatched;
+      this.props.todos.forEach(todo => {
+        if (todo._id === idParams) {
+          todoMatched = todo;
+        }
       });
+
+      if (!todoMatched) {
+        this.setState({ text: '404 Not Found' });
+      } else {
+        this.setState({
+          _id: todoMatched._id,
+          text: todoMatched.text,
+          completed: !!todoMatched.completed,
+          completedAt: todoMatched.completedAt
+        });
+      }
     }
   }
 
@@ -55,10 +85,16 @@ class TodoUpdate extends Component {
   onSubmit = e => {
     e.preventDefault();
 
+    this.props.updateTodo(this.props.auth, {
+      text: this.state.text,
+      completed: this.state.completed,
+      id: this.state._id
+    });
+
     this.props.history.push('/');
   };
   render() {
-    if (this.state.text === 'Not Found') {
+    if (this.state.text === '404 Not Found') {
       return (
         <div className="row">
           <div className="col-md-4 m-auto">
@@ -119,4 +155,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(TodoUpdate);
+export default connect(
+  mapStateToProps,
+  { getTodos, updateTodo }
+)(TodoUpdate);

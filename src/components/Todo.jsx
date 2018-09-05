@@ -20,6 +20,10 @@ class Todo extends Component {
     this.props.onMarkAsCompleteClick(this.state.auth, this.state._id);
   };
 
+  onDeleteClickHandler = () => {
+    this.props.onDeleteTodo(this.state.auth, this.state._id);
+  };
+
   render() {
     const { _id, text, completed, completedAt } = this.state;
 
@@ -60,7 +64,7 @@ class Todo extends Component {
               ) : (
                 <button
                   className="btn btn-danger btn-block mb-2"
-                  onClick={this.onDeleteClick}
+                  onClick={this.onDeleteClickHandler}
                 >
                   Delete
                 </button>

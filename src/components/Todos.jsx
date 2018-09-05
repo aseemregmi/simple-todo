@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import getTodos from '../actions/getTodosAction';
 import Spinner from './Spinner';
 import markAsComplete from '../actions/markAsCompleteAction';
+import deleteTodo from '../actions/deleteTodoAction';
+import { Link } from 'react-router-dom';
 
 import Todo from './Todo';
 
@@ -16,6 +18,12 @@ class Todos extends Component {
       this.props.history.push('/login');
     }
     console.log('COMPONENT WILL MOUNT');
+  }
+
+  componentWillReceiveProps(props) {
+    if (!props.auth) {
+      props.history.push('/login');
+    }
   }
 
   componentDidMount() {
@@ -44,17 +52,25 @@ class Todos extends Component {
           completedAt={todo.completedAt}
           auth={this.props.auth}
           onMarkAsCompleteClick={this.props.markAsComplete}
+          onDeleteTodo={this.props.deleteTodo}
         />
       );
     });
 
     return (
-      <div className="container col-md-6 m-auto">
+      <div className="container col-lg-6 m-auto">
         <div className="card">
           <div className="card-body">
             <div className="card-title text-center">
               <h2>Your Todo's</h2>
               {todosInDOM}
+            </div>
+          </div>
+          <div className="card">
+            <div className="card-body">
+              <Link to="/" className="btn btn-block btn-primary">
+                Go Back To Home
+              </Link>
             </div>
           </div>
         </div>
@@ -72,5 +88,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getTodos, markAsComplete }
+  { getTodos, markAsComplete, deleteTodo }
 )(Todos);

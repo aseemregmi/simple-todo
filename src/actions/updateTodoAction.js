@@ -1,11 +1,11 @@
-import { MARK_AS_COMPLETE } from './types';
+import { UPDATE_TODO } from './types';
 import axios from 'axios';
 
-export default (auth, id) => {
+export default (auth, body) => {
   return async dispatch => {
     const res = await axios.patch(
-      `http://localhost:3000/todos/${id}`,
-      { completed: true },
+      `http://localhost:3000/todos/${body.id}`,
+      { text: body.text, completed: body.completed },
       {
         headers: {
           'X-Auth': auth
@@ -14,7 +14,7 @@ export default (auth, id) => {
     );
 
     dispatch({
-      type: MARK_AS_COMPLETE,
+      type: UPDATE_TODO,
       payload: res.data
     });
   };

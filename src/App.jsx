@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 
@@ -10,6 +10,7 @@ import Todos from './components/Todos';
 import TodoUpdate from './components/TodoUpdate';
 import Home from './components/Home';
 import SignUp from './components/SignUp';
+import Footer from './components/Footer';
 
 // CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -31,6 +32,7 @@ class App extends Component {
               <Route exact path="/signup" component={SignUp} />
               <Route exact path="/" component={Home} />
             </Switch>
+            <Footer />
           </div>
         </Router>
       </Provider>

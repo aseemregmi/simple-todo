@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-
-import postTodo from '../actions/postTodoAction';
 
 class NewTodo extends Component {
   state = {
@@ -13,7 +10,7 @@ class NewTodo extends Component {
   };
   onSubmit = e => {
     e.preventDefault();
-    this.props.postTodo(this.state.text, this.props.auth);
+    this.props.onCreateNewTodoClick(this.state.text, this.props.auth);
   };
   render() {
     return (
@@ -44,14 +41,4 @@ class NewTodo extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    auth: state.currentUser.user['x-auth']
-  };
-}
-export default connect(
-  mapStateToProps,
-  {
-    postTodo
-  }
-)(NewTodo);
+export default NewTodo;

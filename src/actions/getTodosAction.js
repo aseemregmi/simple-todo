@@ -7,7 +7,7 @@ export default token => {
       withCredentials: true,
       headers: { 'X-Auth': token }
     });
-    console.log(res.data.todos);
+
     dispatch({
       type: GET_TODOS,
       payload: res.data.todos

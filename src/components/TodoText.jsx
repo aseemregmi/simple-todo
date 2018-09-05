@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TodoText = props => {
-  return <h5>{props.text}</h5>;
+  return <li className="list-group-item">{props.text}</li>;
 };
 
 export default TodoText;

@@ -1,11 +1,11 @@
-import { MARK_AS_COMPLETE } from './types';
+import { DELETE_TODO } from './types';
 import axios from 'axios';
 
 export default (auth, id) => {
   return async dispatch => {
-    const res = await axios.patch(
+    await axios.delete(
       `http://localhost:3000/todos/${id}`,
-      { completed: true },
+
       {
         headers: {
           'X-Auth': auth
@@ -14,8 +14,8 @@ export default (auth, id) => {
     );
 
     dispatch({
-      type: MARK_AS_COMPLETE,
-      payload: res.data
+      type: DELETE_TODO,
+      payload: id
     });
   };
 };

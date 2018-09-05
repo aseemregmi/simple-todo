@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import getTodos from '../actions/getTodosAction';
+import postTodo from '../actions/postTodoAction';
 import NewTodo from './NewTodo';
 import { Link } from 'react-router-dom';
 import TodoText from './TodoText';
-import equal from 'fast-deep-equal';
+// import equal from 'fast-deep-equal';
 
 class Home extends Component {
   componentWillReceiveProps(props) {
@@ -26,12 +27,16 @@ class Home extends Component {
     if (!this.props.todos) {
       todosInDom = null;
     } else {
-      todosInDom = this.props.todos.map((todo, index) => {
-        return <TodoText key={index} text={todo.text} />;
-      });
+      todosInDom = (
+        <div className="list-group">
+          {this.props.todos.map((todo, index) => {
+            return <TodoText key={index} text={todo.text} />;
+          })}
+        </div>
+      );
     }
     return (
-      <div className="container row mt-4">
+      <div className="container row m-auto mt-4">
         <div className="col-lg-6 m-auto">
           <h2>Welcome to Simple Todo App</h2>
           <span>
@@ -44,7 +49,10 @@ class Home extends Component {
           <br />
           <div className="card">
             <div className="card-body">
-              <NewTodo />
+              <NewTodo
+                auth={this.props.auth}
+                onCreateNewTodoClick={this.props.postTodo}
+              />
             </div>
           </div>
 
@@ -77,6 +85,7 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   {
-    getTodos
+    getTodos,
+    postTodo
   }
 )(Home);
