@@ -4,12 +4,10 @@ import axios from 'axios';
 
 export default token => {
   return async dispatch => {
-    const res = await axios.delete(
-      'https://protected-thicket-67134.herokuapp.com/users/me/token',
-      {
-        headers: { 'x-auth': token }
-      }
-    );
+    const res = await axios.delete('http://localhost:3000/users/me/token', {
+      withCredentials: true,
+      headers: { 'X-Auth': token }
+    });
 
     localStorage.removeItem('user');
 

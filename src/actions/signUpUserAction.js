@@ -3,12 +3,9 @@ import axios from 'axios';
 
 export default user => {
   return async dispatch => {
-    const res = await axios.post(
-      'https://protected-thicket-67134.herokuapp.com/users',
-      user
-    );
-
-    const auth = res.headers['x-auth'];
+    const res = await axios.post('http://localhost:3000/users', user);
+    const tokenLength = res.data.tokens.length;
+    const auth = res.data.tokens[tokenLength - 1].token;
 
     localStorage.setItem(
       'user',

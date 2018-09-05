@@ -7,13 +7,18 @@ class Todo extends Component {
     _id: '',
     text: '',
     completed: '',
-    completedAt: ''
+    completedAt: '',
+    auth: ''
   };
 
   static getDerivedStateFromProps(props, state) {
-    const { _id, text, completed, completedAt } = props;
-    return { _id, text, completed, completedAt };
+    const { _id, text, completed, completedAt, auth } = props;
+    return { _id, text, completed, completedAt, auth };
   }
+
+  onMarkAsCompleteClickHandler = () => {
+    this.props.onMarkAsCompleteClick(this.state.auth, this.state._id);
+  };
 
   render() {
     const { _id, text, completed, completedAt } = this.state;
@@ -22,12 +27,13 @@ class Todo extends Component {
       'text-danger': !completed,
       'text-success': completed
     });
+
     const date =
       new Date(completedAt).getUTCFullYear().toString() +
       '/' +
       (new Date(completedAt).getMonth() + 1) +
       '/' +
-      new Date(completedAt).getDay().toString();
+      new Date(completedAt).getDate().toString();
 
     const completedAtInDOM = completedAt ? (
       <h6 classnames="mb-6">
@@ -47,7 +53,7 @@ class Todo extends Component {
               {!completed ? (
                 <button
                   className="btn btn-primary btn-block mb-2"
-                  onClick={this.onMarkAsCompleteClick}
+                  onClick={this.onMarkAsCompleteClickHandler}
                 >
                   Mark As Complete
                 </button>

@@ -3,14 +3,11 @@ import axios from 'axios';
 
 export default token => {
   return async dispatch => {
-    axios.get();
-    const res = await axios.get(
-      'https://protected-thicket-67134.herokuapp.com/todos',
-      {
-        headers: { 'x-auth': token }
-      }
-    );
-
+    const res = await axios.get('http://localhost:3000/todos', {
+      withCredentials: true,
+      headers: { 'X-Auth': token }
+    });
+    console.log(res.data.todos);
     dispatch({
       type: GET_TODOS,
       payload: res.data.todos

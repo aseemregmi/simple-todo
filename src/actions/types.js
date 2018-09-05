@@ -1,4 +1,4 @@
-export const MARK_TODO_AS_COMPLETE = 'MARK_TODO_AS_COMPLETE';
+export const MARK_AS_COMPLETE = 'MARK_AS_COMPLETE';
 export const UPDATE_TODO = 'UPDATE_TODO';
 export const DELETE_TODO = 'DELETE_TODO';
 export const GET_TODOS = 'GET_TODOS';

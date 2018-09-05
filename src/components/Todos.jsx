@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import getTodos from '../actions/getTodosAction';
 import Spinner from './Spinner';
+import markAsComplete from '../actions/markAsCompleteAction';
 
 import Todo from './Todo';
 
@@ -41,6 +42,8 @@ class Todos extends Component {
           _id={todo._id}
           completed={todo.completed}
           completedAt={todo.completedAt}
+          auth={this.props.auth}
+          onMarkAsCompleteClick={this.props.markAsComplete}
         />
       );
     });
@@ -69,5 +72,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getTodos }
+  { getTodos, markAsComplete }
 )(Todos);

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import getTodos from '../actions/getTodosAction';
 import NewTodo from './NewTodo';
 import { Link } from 'react-router-dom';
+import TodoText from './TodoText';
+import equal from 'fast-deep-equal';
 
 class Home extends Component {
   componentWillReceiveProps(props) {
@@ -10,13 +12,27 @@ class Home extends Component {
       props.history.push('/login');
     }
   }
+  componentWillMount() {
+    if (!this.props.email) {
+      this.props.history.push('/login');
+    }
+  }
   componentDidMount() {
     this.props.getTodos(this.props.auth);
   }
+
   render() {
+    let todosInDom;
+    if (!this.props.todos) {
+      todosInDom = null;
+    } else {
+      todosInDom = this.props.todos.map((todo, index) => {
+        return <TodoText key={index} text={todo.text} />;
+      });
+    }
     return (
       <div className="container row mt-4">
-        <div className="col-md-6 m-auto">
+        <div className="col-lg-6 m-auto">
           <h2>Welcome to Simple Todo App</h2>
           <span>
             <strong className="text-success ">
@@ -38,15 +54,7 @@ class Home extends Component {
               {this.props.todos ? this.props.todos.length : 0} Todos'
             </h3>
 
-            {this.props.todos
-              ? this.props.todos.map(todo => {
-                  return (
-                    <div key={todo._id}>
-                      <span>{todo.text}</span>
-                    </div>
-                  );
-                })
-              : null}
+            {this.props.todos ? todosInDom : null}
 
             <Link to="/todos" className="btn btn-block btn-secondary mt-3">
               Get Detailed List of all Todos
