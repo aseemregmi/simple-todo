@@ -1,10 +1,10 @@
-import { POST_TODO } from './types';
+import { POST_TODO, HEROKU_URL, LOCALHOST_URL } from './types';
 import axios from 'axios';
 
 export default (text, auth) => {
   return async dispatch => {
     const res = await axios.post(
-      'https://protected-thicket-67134.herokuapp.com/todos',
+      `${HEROKU_URL}/todos`,
       { text },
       {
         headers: {

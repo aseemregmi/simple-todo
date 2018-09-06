@@ -1,10 +1,10 @@
-import { DELETE_TODO } from './types';
+import { DELETE_TODO, HEROKU_URL, LOCALHOST_URL } from './types';
 import axios from 'axios';
 
 export default (auth, id) => {
   return async dispatch => {
     await axios.delete(
-      `https://protected-thicket-67134.herokuapp.com/todos/${id}`,
+      `${HEROKU_URL}/todos/${id}`,
 
       {
         headers: {

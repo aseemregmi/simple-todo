@@ -1,10 +1,10 @@
-import { MARK_AS_COMPLETE } from './types';
+import { MARK_AS_COMPLETE, HEROKU_URL, LOCALHOST_URL } from './types';
 import axios from 'axios';
 
 export default (auth, id) => {
   return async dispatch => {
     const res = await axios.patch(
-      `https://protected-thicket-67134.herokuapp.com/todos/${id}`,
+      `${HEROKU_URL}/todos/${id}`,
       { completed: true },
       {
         headers: {

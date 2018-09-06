@@ -1,12 +1,9 @@
-import { USER_SIGNUP } from './types';
+import { USER_SIGNUP, HEROKU_URL, LOCALHOST_URL } from './types';
 import axios from 'axios';
 
 export default user => {
   return async dispatch => {
-    const res = await axios.post(
-      'https://protected-thicket-67134.herokuapp.com/users',
-      user
-    );
+    const res = await axios.post(`${HEROKU_URL}/users`, user);
     const tokenLength = res.data.tokens.length;
     const auth = res.data.tokens[tokenLength - 1].token;
 

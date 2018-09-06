@@ -1,16 +1,11 @@
-import { USER_LOGIN } from './types';
+import { USER_LOGIN, HEROKU_URL, LOCALHOST_URL } from './types';
 import axios from 'axios';
-// https://protected-thicket-67134.herokuapp.com/users/login
 export default user => {
   return async dispatch => {
-    const res = await axios.post(
-      'https://protected-thicket-67134.herokuapp.com/login',
-      user
-    );
+    const res = await axios.post(`${HEROKU_URL}/users/login`, user);
 
     const tokenLength = res.data.tokens.length;
 
-    // console.log(JSON.stringify(res, undefined, 2));
     localStorage.setItem(
       'user',
       JSON.stringify({

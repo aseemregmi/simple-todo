@@ -1,10 +1,10 @@
-import { UPDATE_TODO } from './types';
+import { UPDATE_TODO, HEROKU_URL, LOCALHOST_URL } from './types';
 import axios from 'axios';
 
 export default (auth, body) => {
   return async dispatch => {
     const res = await axios.patch(
-      `https://protected-thicket-67134.herokuapp.com/todos/${body.id}`,
+      `${HEROKU_URL}/todos/${body.id}`,
       { text: body.text, completed: body.completed },
       {
         headers: {
