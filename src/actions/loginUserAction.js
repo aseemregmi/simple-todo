@@ -3,7 +3,10 @@ import axios from 'axios';
 // https://protected-thicket-67134.herokuapp.com/users/login
 export default user => {
   return async dispatch => {
-    const res = await axios.post('http://localhost:3000/users/login', user);
+    const res = await axios.post(
+      'https://protected-thicket-67134.herokuapp.com/login',
+      user
+    );
 
     const tokenLength = res.data.tokens.length;
 

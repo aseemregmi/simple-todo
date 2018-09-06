@@ -4,7 +4,7 @@ import axios from 'axios';
 export default (auth, body) => {
   return async dispatch => {
     const res = await axios.patch(
-      `http://localhost:3000/todos/${body.id}`,
+      `https://protected-thicket-67134.herokuapp.com/todos/${body.id}`,
       { text: body.text, completed: body.completed },
       {
         headers: {

@@ -4,7 +4,7 @@ import axios from 'axios';
 export default (auth, id) => {
   return async dispatch => {
     await axios.delete(
-      `http://localhost:3000/todos/${id}`,
+      `https://protected-thicket-67134.herokuapp.com/todos/${id}`,
 
       {
         headers: {

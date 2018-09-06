@@ -4,7 +4,7 @@ import axios from 'axios';
 export default (text, auth) => {
   return async dispatch => {
     const res = await axios.post(
-      'http://localhost:3000/todos',
+      'https://protected-thicket-67134.herokuapp.com/todos',
       { text },
       {
         headers: {
