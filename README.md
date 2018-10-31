@@ -1,1 +1,1 @@
-This application is the front end for my other repo 'node-rest-api'. This allows user to login create read update delete their todos.
+A simple todo application built using react that fetches data from the backend of my other repo 'node-rest-api'. It is a full application, you can login and create, update, delete and mark todos as complete.
